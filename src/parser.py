@@ -3,6 +3,18 @@ from pathlib import Path
 
 
 def load_instruction_data(file_path):
+    """
+    Load and validate RISC-V instruction JSON data.
+
+    Args:
+        file_path (str or Path):
+            Path to the instr_dict.json file.
+
+    Returns:
+        dict:
+            Parsed instruction dictionary.
+    """
+
     file_path = Path(file_path)
 
     if not file_path.exists():

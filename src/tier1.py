@@ -2,6 +2,25 @@ from collections import defaultdict
 
 
 def process_tier1(instruction_data):
+    """
+    Process instruction data for Tier 1 requirements.
+
+    Groups instructions by extension and identifies instructions
+    that belong to multiple extensions.
+
+    Args:
+        instruction_data (dict):
+            Parsed instruction dictionary.
+
+    Returns:
+        tuple:
+            grouped_extensions (defaultdict(set)):
+                Maps extension tags to instruction mnemonics.
+
+            multi_extension_instructions (dict):
+                Maps mnemonics to multiple extensions.
+    """
+
     grouped_extensions = defaultdict(set)
     multi_extension_instructions = {}
 
@@ -24,6 +43,18 @@ def process_tier1(instruction_data):
 
 
 def generate_summary(grouped_extensions):
+    """
+    Generate formatted Tier 1 summary lines.
+
+    Args:
+        grouped_extensions (dict):
+            Maps extension tags to instruction mnemonics.
+
+    Returns:
+        list:
+            Formatted summary lines.
+    """
+
     summary_lines = []
 
     for extension in sorted(grouped_extensions.keys()):
