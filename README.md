@@ -87,7 +87,7 @@ RISC_V-challenge/
 
 ```bash
 git clone https://github.com/ayush844/RISC-V-Mentorship-Coding-Challenge.git
-cd RISC_V-challenge
+cd RISC-V-Mentorship-Coding-Challenge
 ```
 
 ---
