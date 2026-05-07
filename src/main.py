@@ -1,6 +1,7 @@
 from src.instruction_parser import load_instruction_data
 
-from src.tier1 import process_tier1, generate_summary
+from src.tier1 import (process_tier1, generate_summary,
+                       format_multi_extension_table)
 from src.normalizer import normalize_extension_name
 from src.manual_parser import extract_manual_extensions
 from src.cross_reference import (
@@ -41,14 +42,17 @@ def main():
             print(line)
 
         print("\n------------- Tier 1: Instructions in Multiple Extensions -------------")
-        for mnemonic, extensions in list(multi_extension_instructions.items())[:20]:
-            print(f"{mnemonic} | {', '.join(extensions)}")
+        multi_ext_lines = format_multi_extension_table(multi_extension_instructions)
+        for line in multi_ext_lines[:22]:
+            print(line)
 
         # Output file path for Tier 1 results
-        output_path = "output/tier1_summary.txt"
+        tier1_output_path = Path("output/tier1_summary.txt")
+        # Ensure output directory exists
+        tier1_output_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Save complete Tier 1 report to output file
-        with open(output_path, "w", encoding="utf-8") as output_file:
+        with open(tier1_output_path, "w", encoding="utf-8") as output_file:
 
             # Write extension summary section
             output_file.write("------------- Extension Summary -------------\n")
@@ -61,14 +65,12 @@ def main():
                 "\n------------- Instructions in Multiple Extensions -------------\n"
             )
 
-            for mnemonic, extensions in sorted(
-                multi_extension_instructions.items()
-            ):
-                output_file.write(
-                    f"{mnemonic} | {', '.join(extensions)}\n"
-                )
+            multi_ext_lines = format_multi_extension_table(multi_extension_instructions)
 
-        print(f"\nTier 1 output saved to: {output_path}")
+            for line in multi_ext_lines:
+                output_file.write(line + "\n")
+
+        print(f"\nTier 1 output saved to: {tier1_output_path}")
 
         # Tier 2 Processing
 
@@ -126,7 +128,10 @@ def main():
             print(ext)
 
         # Save Tier 2 report
-        tier2_output_path = "output/tier2_cross_reference.txt"
+        tier2_output_path = Path("output/tier2_cross_reference.txt")
+        # Ensure output directory exists
+        tier2_output_path.parent.mkdir(parents=True, exist_ok=True)
+
 
         with open(tier2_output_path, "w", encoding="utf-8") as output_file:
 
