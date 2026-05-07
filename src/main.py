@@ -52,6 +52,7 @@ def main():
         # -------- Graph Generation --------
         graph = build_extension_graph(multi_extension_instructions)
         graph_lines = format_graph(graph)
+        print("\nGenerating extension graph visualization...")
         plot_graph(graph)
 
         print("\n------------- Extension Relationship Graph -------------")
