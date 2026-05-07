@@ -1,7 +1,7 @@
 import json
 import pytest
 
-from src.parser import load_instruction_data
+from src.instruction_parser import load_instruction_data
 
 
 def test_load_valid_instruction_data(tmp_path):
