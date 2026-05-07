@@ -55,19 +55,35 @@ def generate_summary(grouped_extensions):
             Formatted summary lines.
     """
 
-    summary_lines = []
+    header = f"{'Extension':<15} | {'Count':<6} | Example"
+    separator = "-" * 45
+
+    summary_lines = [header, separator]
 
     for extension in sorted(grouped_extensions.keys()):
         instructions = sorted(grouped_extensions[extension])
-        instruction_count = len(instructions)
-        example_mnemonic = instructions[0] if instructions else "N/A"
+        count = len(instructions)
+        example = instructions[0] if instructions else "N/A"
 
-        summary_line = (
-            f"{extension} | "
-            f"{instruction_count} instructions | "
-            f"e.g. {example_mnemonic}"
-        )
-
-        summary_lines.append(summary_line)
+        line = f"{extension:<15} | {count:<6} | {example}"
+        summary_lines.append(line)
 
     return summary_lines
+
+
+def format_multi_extension_table(multi_extension_instructions):
+    """
+    Generate table for instructions belonging to multiple extensions.
+    """
+
+    header = f"{'Instruction':<15} | Extensions"
+    separator = "-" * 50
+
+    lines = [header, separator]
+
+    for mnemonic, extensions in sorted(multi_extension_instructions.items()):
+        ext_str = ", ".join(sorted(extensions))
+        line = f"{mnemonic:<15} | {ext_str}"
+        lines.append(line)
+
+    return lines
