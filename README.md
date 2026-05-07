@@ -92,7 +92,7 @@ cd RISC-V-Mentorship-Coding-Challenge
 
 ---
 
-### 2. Create virtual environment (optional but recommended)
+### 2. Create virtual environment
 
 ```bash
 python3 -m venv venv
